@@ -4,11 +4,12 @@ export default {
     './layouts/**/*.vue',
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
+    './app/**/*.{vue,js,ts}',
     './app.vue',
     './error.vue'
   ],
   theme: {
     extend: {}
   },
-  plugins: []
+  plugins: [require('@tailwindcss/typography')]
 }
