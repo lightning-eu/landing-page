@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { data: blockHeight } = await useFetch('https://mempool.space/api/blocks/tip/height')
+const mobileMenuOpen = ref(false)
 </script>
 
 <template>
@@ -13,7 +14,14 @@ const { data: blockHeight } = await useFetch('https://mempool.space/api/blocks/t
           <p class="text-[0.55rem] uppercase tracking-[0.35em] text-white/50">Development</p>
         </div>
       </NuxtLink>
-      <nav class="flex items-center gap-4 text-sm text-white/70">
+      <button
+        class="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/70 transition hover:text-white sm:hidden"
+        type="button"
+        @click="mobileMenuOpen = !mobileMenuOpen"
+      >
+        Menu
+      </button>
+      <nav class="hidden items-center gap-4 text-sm text-white/70 sm:flex">
         <div class="group relative">
           <button class="inline-flex items-center gap-1 transition hover:text-white" type="button">
             Operations
@@ -57,6 +65,36 @@ const { data: blockHeight } = await useFetch('https://mempool.space/api/blocks/t
         </a>
       </nav>
     </header>
+    <div v-if="mobileMenuOpen" class="mx-auto w-full max-w-5xl px-6 pb-6 sm:hidden">
+      <div class="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
+        <p class="text-xs uppercase tracking-[0.35em] text-white/50">Operations</p>
+        <div class="mt-3 grid gap-2">
+          <a class="rounded-lg px-3 py-2 transition hover:bg-white/10 hover:text-white" href="https://bitcoin.lightning.eu">
+            Bitcoin
+          </a>
+          <a class="rounded-lg px-3 py-2 transition hover:bg-white/10 hover:text-white" href="https://wallet.lightning.eu">
+            Lightning
+          </a>
+          <a class="rounded-lg px-3 py-2 transition hover:bg-white/10 hover:text-white" href="https://dex.lightning.eu">
+            DEX
+          </a>
+        </div>
+        <div class="mt-4 grid gap-2">
+          <NuxtLink class="rounded-lg px-3 py-2 transition hover:bg-white/10 hover:text-white" to="/journals">
+            Journals
+          </NuxtLink>
+          <NuxtLink class="rounded-lg px-3 py-2 transition hover:bg-white/10 hover:text-white" to="/about">
+            About
+          </NuxtLink>
+          <a
+            class="rounded-lg px-3 py-2 transition hover:bg-white/10 hover:text-white"
+            href="https://github.com/lightning-eu"
+          >
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
     <main class="mx-auto w-full max-w-5xl px-6 pb-16">
       <slot />
     </main>
